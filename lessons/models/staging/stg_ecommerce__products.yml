@@ -8,7 +8,13 @@ models:
         description: ""
 
       - name: cost
-        description: ""
+        description: "How much the product cost the business to purchase"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+
 
       - name: category
         description: ""
@@ -20,7 +26,13 @@ models:
         description: ""
 
       - name: retail_price
-        description: ""
+        description: "How much the product retails for on the online store"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+          - dbt_utils.expression_is_true:
+              expression: ">= cost"
 
       - name: department
         description: ""
