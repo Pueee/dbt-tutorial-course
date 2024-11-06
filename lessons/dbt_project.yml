@@ -33,3 +33,11 @@ models:
   lessons:
     # Config indicated by + and applies to all files under models/example/
       +materialized: table
+      # Table deletes 168 hours (7 days) after creation
+    # Note, for incremental models this does not reset each run!
+      +hours_to_expiration: 168
+  
+tests:
+  lessons:
+      +severity: warn
+  
